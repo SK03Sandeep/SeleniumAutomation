@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.testng.Assert;
 public class Alerts {
     public static void main(String[]args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();
@@ -37,7 +37,7 @@ public class Alerts {
 
         WebElement output= driver.findElement(By.xpath("//div[@id='output']"));
         System.out.println("Output--->"+output.getText());
-
+        Assert.assertEquals("You selected alert popup",output.getText());
         confirmbtn.click();
         Thread.sleep(2000);
 
