@@ -15,22 +15,25 @@ public class Waits {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.navigate().to("https://www.hyrtutorials.com/p/waits-demo.html");
-        Thread.sleep(3000);
+        driver.navigate().to("https://chercher.tech/practice/explicit-wait-sample-selenium-webdriver");
+        Thread.sleep(2000);
         System.out.println("Page title--> " + driver.getTitle());
-        Thread.sleep(10000);
+        Thread.sleep(3000);
+        WebDriverWait wait1 = new WebDriverWait(driver,Duration.ofSeconds(5));
+        WebDriverWait wait2 = new WebDriverWait(driver,Duration.ofSeconds(15));
 
-        WebElement btn1= driver.findElement(By.id("btn1"));
-        WebElement btn2= driver.findElement(By.id("btn2"));
+        WebElement btnchangetxt= driver.findElement(By.xpath("//button[@id='populate-text']"));
+        WebElement newtext= driver.findElement(By.xpath("//h2[@class='target-text']")); // after clicking on " btnchangetxt" it will take 10 secs to change the text in this locator.
+        WebElement btnDisplay= driver.findElement(By.xpath("//button[@id='display-other-button']"));
+        WebElement hiddenbtn= driver.findElement(By.xpath("//button[@id='hidden']"));  // after clicking on " btndisplay" it will take 10 secs to display a new button in this locator.
 
-        WebDriverWait wait1 = new WebDriverWait(driver,Duration.ofSeconds(8));
-        btn1.click();
-
-       // wait1.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("txt1"))));
-        WebElement tbox1= driver.findElement(By.id("txt1"));
-        tbox1.sendKeys("sandeep");
-        Assert.assertTrue(tbox1.isDisplayed());
-
+        btnchangetxt.click();
+        wait2.until(ExpectedConditions.textToBePresentInElement(newtext,"Selenium Webdriver"));
+        System.out.println("new text 'Selenium Webdriver'found after 10 secs");
+        Thread.sleep(3000);
+        btnDisplay.click();
+        wait2.until(ExpectedConditions.visibilityOf(hiddenbtn));
+        System.out.println("new button 'Enabled' found after 10 secs");
         driver.quit();
     }
 }
