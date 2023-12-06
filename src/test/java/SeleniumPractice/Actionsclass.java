@@ -1,11 +1,11 @@
 package SeleniumPractice;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,11 +21,17 @@ public class  Actionsclass{
            driver.findElement(By.xpath("/html/body/div[3]/div/span")).click();
        Thread.sleep(3000);
 
+       TakesScreenshot screenshot= (TakesScreenshot)driver;
 
        List<WebElement> categoriesdropdown=driver.findElements(By.xpath("//*[@id=\"container\"]/div/div[1]/div/div/div/div/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/div/div/div/div/div[1]/div/div/div/span"));
        for (WebElement i:categoriesdropdown) {
             obj.moveToElement(i).build().perform();
-                Thread.sleep(3000);
+            Thread.sleep(3000);
+           File image=screenshot.getScreenshotAs(OutputType.FILE);
+           String destpath= "C:\\Users\\Dell\\Desktop\\Automation\\Screenshots\\"+i.getText()+".png";
+           File dest=new File(destpath);
+           FileUtils.copyFile(image,dest);
+            Thread.sleep(3000);
        }
 
        Thread.sleep(5000);
