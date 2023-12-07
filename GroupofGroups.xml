@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="GroupofGroups">
+        <groups>
+
+            <define name="biweekly build">
+                <include name="functional"></include>
+                <include name="regression"></include>
+            </define>
+
+            <run>
+                <include name="biweekly build"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="Testngtestcases.Groupsclass1"></class>
+            <class name="Testngtestcases.Groupsclass2"></class>
+
+        </classes>
+    </test>
+</suite>
